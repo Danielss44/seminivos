@@ -1,5 +1,9 @@
 package com.Danielss44.seminovos.services;
 
+import com.Danielss44.seminovos.DTO.h3.H3ResponseDTO;
+import com.Danielss44.seminovos.DTO.revisao.RevisaoResponseDTO;
+import com.Danielss44.seminovos.DTO.servicoVeiculo.ServicoVeiculoResponseDTO;
+import com.Danielss44.seminovos.DTO.veiculo.VeiculoDetalhesResponseDTO;
 import com.Danielss44.seminovos.DTO.veiculo.VeiculoRequestDTO;
 import com.Danielss44.seminovos.DTO.veiculo.VeiculoResponseDTO;
 import com.Danielss44.seminovos.exception.EntidadeNaoEncontradaException;
@@ -106,4 +110,47 @@ public class VeiculoService {
 
     }
 
+    @Transactional(readOnly = true)
+    public VeiculoDetalhesResponseDTO buscarDetalhes(Long id){
+        Veiculo veiculo = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Veículo não encontrado"));
+
+        RevisaoResponseDTO revisaoDTO = revisaoRepository.findByVeiculoId(veiculo.getId())
+                .map(r -> new RevisaoResponseDTO(r.getId(),r.isFinalizado(), r.getDataRevisao(), r.getObservacoes()))
+                .orElse(null);
+
+        H3ResponseDTO h3DTO = h3Repository.findByVeiculoId(veiculo.getId())
+                .map(h -> new H3ResponseDTO(h.getId(), h.getFornecedor().getNome(), h.isFinalizado(), h.getDataH3()))
+                .orElse(null);
+
+        List<ServicoVeiculoResponseDTO> servicosDTO = servicoVeiculoRepository.findByVeiculoPlaca(veiculo.getPlaca())
+                .stream()
+                .map(s -> new ServicoVeiculoResponseDTO(
+                        s.getId(),
+                        s.getTipoServico().getTipo(),
+                        s.getFornecedor().getNome(),
+                        s.getValor(),
+                        s.getDataInicio(),
+                        s.getDataConclusao(),
+                        s.getStatus()
+                ))
+                .toList();
+
+        boolean prontoParaVenda = veiculo.getStatus() == StatusVeiculo.PRONTO_PARA_VENDA;
+
+        return new VeiculoDetalhesResponseDTO(
+                veiculo.getId(),
+                veiculo.getPlaca(),
+                veiculo.getModelo(),
+                veiculo.getAno(),
+                veiculo.getCor(),
+                veiculo.getQuilometragem(),
+                veiculo.getValor(),
+                veiculo.getDataEntrada(),
+                veiculo.getStatus(),
+                revisaoDTO,
+                h3DTO,
+                servicosDTO,
+                prontoParaVenda
+        );
+    }
 }

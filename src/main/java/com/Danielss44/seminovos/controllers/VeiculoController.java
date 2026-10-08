@@ -1,5 +1,6 @@
 package com.Danielss44.seminovos.controllers;
 
+import com.Danielss44.seminovos.DTO.veiculo.VeiculoDetalhesResponseDTO;
 import com.Danielss44.seminovos.DTO.veiculo.VeiculoRequestDTO;
 import com.Danielss44.seminovos.DTO.veiculo.VeiculoResponseDTO;
 import com.Danielss44.seminovos.model.StatusVeiculo;
@@ -48,6 +49,11 @@ public class VeiculoController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    @GetMapping("/{id}/detalhes")
+    public ResponseEntity<VeiculoDetalhesResponseDTO> buscarDetalhes(@PathVariable Long id){
+        VeiculoDetalhesResponseDTO responseDTO = service.buscarDetalhes(id);
+        return ResponseEntity.ok(responseDTO);
+    }
 
 
 }
