@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários — Seminovos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Seminovos</h2>
+            <p>Gestão Operacional</p>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="/veiculos.html">Veículos</a></li>
+            <li><a href="/dashboard.html" id="menu-dashboard">Dashboard</a></li>
+            <li><a href="/cadastro-veiculo.html" id="menu-cadastro">Cadastrar Veículo</a></li>
+            <li><a href="/gestao-operacional.html" id="menu-gestao">Gestão Operacional</a></li>
+            <li><a href="/usuarios.html" id="menu-usuarios" class="ativo">Usuários</a></li>
+            <li><a href="/auxiliares.html" id="menu-auxiliares">Auxiliares</a></li>
+        </ul>
+
+        <div class="sidebar-usuario">
+            <span id="usuario-nome">Carregando...</span>
+            <button onclick="logout()" class="btn-perigo" style="width:100%; margin-top: 4px;">
+                Sair
+            </button>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+        <h1 class="pagina-titulo">Cadastrar Usuário</h1>
+
+        <div id="mensagem-erro" class="mensagem-erro"></div>
+        <div id="mensagem-sucesso" class="mensagem-sucesso"></div>
+
+        <section class="card">
+            <form id="form-usuario">
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" placeholder="Nome completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login">Login</label>
+                        <input type="text" id="login" placeholder="Ex.: joao" autocomplete="off" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" minlength="6"
+                               placeholder="Mínimo de 6 caracteres" autocomplete="new-password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="perfil">Perfil</label>
+                        <select id="perfil" required>
+                            <option value="">Selecione...</option>
+                            <option value="VENDEDOR">Vendedor</option>
+                            <option value="GERENTE">Gerente</option>
+                            <option value="ADMIN">Administrador</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-acoes">
+                    <button type="submit" id="btn-salvar" class="btn-primario">Cadastrar</button>
+                    <a href="/veiculos.html" class="btn-secundario">Cancelar</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
+<script src="js/permissions.js"></script>
+<script src="js/components.js"></script>
+<script src="js/pages/usuarios.js"></script>
+</body>
+</html>

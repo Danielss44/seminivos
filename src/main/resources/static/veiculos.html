@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veículos - Seminovos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="layout">
+
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>Seminovos</h2>
+                <p>Gestão Operacional</p>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li><a href="/veiculos.html" class="ativo">Veículos</a></li>
+                <li><a href="/dashboard.html" id="menu-dashboard">Dashboard</a></li>
+                <li><a href="/cadastro-veiculo.html" id="menu-cadastro">Cadastrar Veículo</a></li>
+                <li><a href="/gestao-operacional.html" id="menu-gestao">Gestao Operacional</a></li>
+                <li><a href="/usuarios.html" id="menu-usuarios">Usuários</a></li>
+                <li><a href="/auxiliares.html" id="menu-auxiliares">Auxiliares</a></li>
+            </ul>
+
+            <div class="sidebar-usuario">
+                <span id="usuario-nome">Carregando...</span>
+                <button onclick="logout()" class="btn-perigo" style="width:100%; margin-top: 4px;">
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <main class="conteudo">
+            <h1 class="pagina-titulo">Veículos</h1>
+
+            <div class="busca-container">
+                <select id="tipo-busca">
+                    <option value="placa">Placa</option>
+                    <option value="modelo">Modelo</option>
+                </select>
+                <input type="text" id="campo-busca" placeholder="Digite para pesquisar...">
+                <button onclick="pesquisar()" class="btn-primario" style="width: auto; padding: 10px 24px;">
+                    Pesquisar
+                </button>
+                <button onclick="listarTodos()" class="btn-secundario">
+                    Ver Todos
+                </button>
+            </div>
+
+            <div id="mensagem-erro" class="mensagem-erro"></div>
+
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Placa</th>
+                            <th>Modelo</th>
+                            <th>Ano</th>
+                            <th>Cor</th>
+                            <th>Km</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-veiculos">
+                        <tr>
+                            <td colspan="8" class="estado-loading">Carregando veículos...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/permissions.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/pages/veiculos.js"></script>
+</body>
+</html>

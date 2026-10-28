@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes — Seminovos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Seminovos</h2>
+            <p>Gestão Operacional</p>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="/veiculos.html" class="ativo">Veículos</a></li>
+            <li><a href="/dashboard.html" id="menu-dashboard">Dashboard</a></li>
+            <li><a href="/cadastro-veiculo.html" id="menu-cadastro">Cadastrar Veículo</a></li>
+            <li><a href="/gestao-operacional.html" id="menu-gestao">Gestão Operacional</a></li>
+            <li><a href="/usuarios.html" id="menu-usuarios">Usuários</a></li>
+            <li><a href="/auxiliares.html" id="menu-auxiliares">Auxiliares</a></li>
+        </ul>
+
+        <div class="sidebar-usuario">
+            <span id="usuario-nome">Carregando...</span>
+            <button onclick="logout()" class="btn-perigo" style="width:100%; margin-top: 4px;">
+                Sair
+            </button>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+
+        <div class="pagina-cabecalho">
+            <h1 class="pagina-titulo">Detalhes do Veículo</h1>
+            <a href="/veiculos.html" class="btn-secundario">← Voltar</a>
+        </div>
+
+        <div id="mensagem-erro" class="mensagem-erro"></div>
+        <div id="loading" class="estado-loading">Carregando...</div>
+
+        <div id="conteudo-detalhes" style="display: none;">
+
+            <section class="card">
+                <h2>Dados do veículo</h2>
+                <div class="info-grid">
+                    <div class="info-item"><label>Placa</label><span id="det-placa"></span></div>
+                    <div class="info-item"><label>Modelo</label><span id="det-modelo"></span></div>
+                    <div class="info-item"><label>Ano</label><span id="det-ano"></span></div>
+                    <div class="info-item"><label>Cor</label><span id="det-cor"></span></div>
+                    <div class="info-item"><label>Quilometragem</label><span id="det-km"></span></div>
+                    <div class="info-item"><label>Valor</label><span id="det-valor"></span></div>
+                    <div class="info-item"><label>Data de entrada</label><span id="det-entrada"></span></div>
+                    <div class="info-item"><label>Status</label><span id="det-status"></span></div>
+                    <div class="info-item"><label>Disponível para venda</label><span id="det-disponivel"></span></div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Revisão</h2>
+                <div id="det-revisao"></div>
+            </section>
+
+            <section class="card">
+                <h2>Higienização (H3)</h2>
+                <div id="det-h3"></div>
+            </section>
+
+            <section class="card">
+                <h2>Serviços</h2>
+                <div class="tabela-container">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Fornecedor</th>
+                            <th>Valor</th>
+                            <th>Início</th>
+                            <th>Conclusão</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody id="det-servicos"></tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
+<script src="js/permissions.js"></script>
+<script src="js/components.js"></script>
+<script src="js/pages/detalhes.js"></script>
+</body>
+</html>

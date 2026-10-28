@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Veículo — Seminovos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Seminovos</h2>
+            <p>Gestão Operacional</p>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="/veiculos.html">Veículos</a></li>
+            <li><a href="/dashboard.html" id="menu-dashboard">Dashboard</a></li>
+            <li><a href="/cadastro-veiculo.html" id="menu-cadastro" class="ativo">Cadastrar Veículo</a></li>
+            <li><a href="/gestao-operacional.html" id="menu-gestao">Gestão Operacional</a></li>
+            <li><a href="/usuarios.html" id="menu-usuarios">Usuários</a></li>
+            <li><a href="/auxiliares.html" id="menu-auxiliares">Auxiliares</a></li>
+        </ul>
+
+        <div class="sidebar-usuario">
+            <span id="usuario-nome">Carregando...</span>
+            <button onclick="logout()" class="btn-perigo" style="width:100%; margin-top: 4px;">
+                Sair
+            </button>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+        <h1 class="pagina-titulo">Cadastrar Veículo</h1>
+
+        <div id="mensagem-erro" class="mensagem-erro"></div>
+        <div id="mensagem-sucesso" class="mensagem-sucesso"></div>
+
+        <section class="card">
+            <form id="form-veiculo">
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="placa">Placa</label>
+                        <input type="text" id="placa" placeholder="ABC1D23"
+                               minlength="7" maxlength="7" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" id="modelo" placeholder="Ex.: Civic" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ano">Ano</label>
+                        <input type="number" id="ano" min="1900" placeholder="Ex.: 2020" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cor">Cor</label>
+                        <input type="text" id="cor" placeholder="Ex.: Preto" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quilometragem">Quilometragem</label>
+                        <input type="number" id="quilometragem" min="0" placeholder="Ex.: 45000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valor">Valor de venda (R$)</label>
+                        <input type="number" id="valor" min="0.01" step="0.01" placeholder="Ex.: 95000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data-entrada">Data de entrada</label>
+                        <input type="date" id="data-entrada" required>
+                    </div>
+
+                </div>
+
+                <div class="form-acoes">
+                    <button type="submit" id="btn-salvar" class="btn-primario">Salvar</button>
+                    <a href="/veiculos.html" class="btn-secundario">Cancelar</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
+<script src="js/permissions.js"></script>
+<script src="js/components.js"></script>
+<script src="js/pages/cadastro-veiculos.js"></script>
+</body>
+</html>
