@@ -1,20 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     requireAuth();
-
-    const user = getCurrentUser();
-    document.getElementById('usuario-nome').textContent = user.login + ' (' + user.role + ')';
-
-    if (!canAccess('ADMIN', 'GERENTE')) {
-        document.getElementById('menu-dashboard').parentElement.style.display = 'none';
-        document.getElementById('menu-cadastro').parentElement.style.display = 'none';
-        document.getElementById('menu-gestao').parentElement.style.display = 'none';
-        document.getElementById('menu-usuarios').parentElement.style.display = 'none';
-        document.getElementById('menu-auxiliares').parentElement.style.display = 'none';
-    }
-
+    configurarSidebar();
     listarTodos();
-
 });
 
 async function listarTodos() {

@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = '';
 
 async function apiRequest(url, options = {}){
     const  headers = {
@@ -11,10 +11,12 @@ async function apiRequest(url, options = {}){
         headers['Authorization'] = 'Bearer ' + token;
     }
 
-    const response = await  fetch(BASE_URL + url, {
-        ...options,
-        headers
-    });
+    let response
+    try {
+        response = await  fetch(BASE_URL + url, { ...options, headers});
+    } catch (error){
+        throw new  Error('Mão foi possível conectar ao servidor. Verifique sua conexão.');
+    }
 
     if (url === '/auth/login' && (response.status === 401 || response.status === 403)){
         throw new Error('Login ou senha inválidos.');
@@ -22,7 +24,7 @@ async function apiRequest(url, options = {}){
 
     if (response.status === 401) {
         logout();
-        return;
+        throw new Error('Sua sessão expirou. Faça login novamente.');
     }
 
     if (response.status === 403) {
@@ -34,10 +36,18 @@ async function apiRequest(url, options = {}){
     }
 
     const texto = await response.text();
-    const data = texto ? JSON.parse(texto) : null;
+    let data = null;
+    try {
+        data = texto ? JSON.parse(texto) : null;
+    } catch (error) {
+        data = null;
+    }
 
     if (!response.ok) {
-        throw new Error((data && data.mensagem) || 'Erro inesperado.');
+        const padrao = response.status >= 500
+                ? 'Erro no servidor. Tente novamente em instantes.'
+                : 'Não foi possível concluir a operação.';
+        throw new Error((data && data.mensagem) || padrao);
     }
 
     return data;

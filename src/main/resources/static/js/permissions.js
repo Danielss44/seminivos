@@ -22,6 +22,10 @@ function requireRole(...roles){
     if (!hasAnyRole(...roles)){
         window.location.href = '/login.html';
     }
+
+    if (!hasAnyRole(...roles)) {
+        window.location.href = '/veiculos.html';
+    }
 }
 
 function canAccess(...roles){

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão Operacional — Seminovos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Seminovos</h2>
+            <p>Gestão Operacional</p>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="/veiculos.html">Veículos</a></li>
+            <li><a href="/dashboard.html" id="menu-dashboard">Dashboard</a></li>
+            <li><a href="/cadastro-veiculo.html" id="menu-cadastro">Cadastrar Veículo</a></li>
+            <li><a href="/gestao-operacional.html" id="menu-gestao" class="ativo">Gestão Operacional</a></li>
+            <li><a href="/usuarios.html" id="menu-usuarios">Usuários</a></li>
+            <li><a href="/auxiliares.html" id="menu-auxiliares">Auxiliares</a></li>
+        </ul>
+
+        <div class="sidebar-usuario">
+            <span id="usuario-nome">Carregando...</span>
+            <button onclick="logout()" class="btn-perigo" style="width:100%; margin-top: 4px;">
+                Sair
+            </button>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+        <h1 class="pagina-titulo">Gestão Operacional</h1>
+
+        <div id="mensagem-erro" class="mensagem-erro"></div>
+        <div id="mensagem-sucesso" class="mensagem-sucesso"></div>
+
+        <section class="card">
+            <h2>Buscar veículo</h2>
+            <form id="form-busca" class="form-inline">
+                <div class="form-group">
+                    <label for="busca-placa">Placa</label>
+                    <input type="text" id="busca-placa" placeholder="ABC1D23" maxlength="7" required>
+                </div>
+                <button type="submit" class="btn-primario">Buscar</button>
+            </form>
+        </section>
+
+        <div id="area-veiculo" style="display: none;">
+
+            <!-- Resumo -->
+            <section class="card">
+                <h2>Veículo</h2>
+                <div class="info-grid">
+                    <div class="info-item"><label>Placa</label><span id="v-placa"></span></div>
+                    <div class="info-item"><label>Modelo</label><span id="v-modelo"></span></div>
+                    <div class="info-item"><label>Status</label><span id="v-status"></span></div>
+                    <div class="info-item"><label>Disponível para venda</label><span id="v-disponivel"></span></div>
+                </div>
+            </section>
+
+            <!-- Revisão -->
+            <section class="card">
+                <h2>Revisão</h2>
+                <div id="revisao-estado"></div>
+
+                <form id="form-revisao" style="display: none;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="revisao-data">Data da revisão</label>
+                            <input type="date" id="revisao-data" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="revisao-obs">Observações</label>
+                            <textarea id="revisao-obs" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-acoes">
+                        <button type="submit" class="btn-primario">Lançar revisão</button>
+                    </div>
+                </form>
+
+                <button id="btn-finalizar-revisao" class="btn-sucesso"
+                        style="display: none; margin-top: 16px;">Finalizar revisão</button>
+            </section>
+
+            <!-- H3 -->
+            <section class="card">
+                <h2>Higienização (H3)</h2>
+                <div id="h3-estado"></div>
+
+                <form id="form-h3" style="display: none;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="h3-fornecedor">Empresa responsável</label>
+                            <select id="h3-fornecedor" required>
+                                <option value="">Selecione...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="h3-data">Data do H3</label>
+                            <input type="date" id="h3-data" required>
+                        </div>
+                    </div>
+                    <div class="form-acoes">
+                        <button type="submit" class="btn-primario">Lançar H3</button>
+                    </div>
+                </form>
+
+                <button id="btn-finalizar-h3" class="btn-sucesso"
+                        style="display: none; margin-top: 16px;">Finalizar H3</button>
+            </section>
+
+            <!-- Serviços -->
+            <section class="card">
+                <h2>Serviços</h2>
+
+                <div class="tabela-container">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Serviço</th>
+                            <th>Fornecedor</th>
+                            <th>Valor</th>
+                            <th>Início</th>
+                            <th>Conclusão</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tabela-servicos"></tbody>
+                    </table>
+                </div>
+
+                <h3 class="subtitulo">Adicionar serviço</h3>
+                <form id="form-servico">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="servico-tipo">Tipo de serviço</label>
+                            <select id="servico-tipo" required>
+                                <option value="">Selecione...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="servico-fornecedor">Fornecedor</label>
+                            <select id="servico-fornecedor" required disabled>
+                                <option value="">Selecione o tipo primeiro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="servico-valor">Valor (R$)</label>
+                            <input type="number" id="servico-valor" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="servico-data">Data de início</label>
+                            <input type="date" id="servico-data" required>
+                        </div>
+                    </div>
+                    <div class="form-acoes">
+                        <button type="submit" class="btn-primario">Adicionar serviço</button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
+<script src="js/permissions.js"></script>
+<script src="js/components.js"></script>
+<script src="js/pages/gestao-operacional.js"></script>
+</body>
+</html>

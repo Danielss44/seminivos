@@ -55,11 +55,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Data de hoje no formato yyyy-mm-dd, usando o horário local.
-// Não use toISOString() aqui: ele trabalha em UTC e, à noite no Brasil, devolve o dia seguinte.
-function hojeLocal() {
-    const d = new Date();
-    const mes = String(d.getMonth() + 1).padStart(2, '0');
-    const dia = String(d.getDate()).padStart(2, '0');
-    return `${d.getFullYear()}-${mes}-${dia}`;
-}

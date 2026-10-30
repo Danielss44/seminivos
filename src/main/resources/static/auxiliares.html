@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastros Auxiliares — Seminovos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Seminovos</h2>
+            <p>Gestão Operacional</p>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="/veiculos.html">Veículos</a></li>
+            <li><a href="/dashboard.html" id="menu-dashboard">Dashboard</a></li>
+            <li><a href="/cadastro-veiculo.html" id="menu-cadastro">Cadastrar Veículo</a></li>
+            <li><a href="/gestao-operacional.html" id="menu-gestao">Gestão Operacional</a></li>
+            <li><a href="/usuarios.html" id="menu-usuarios">Usuários</a></li>
+            <li><a href="/auxiliares.html" id="menu-auxiliares" class="ativo">Auxiliares</a></li>
+        </ul>
+
+        <div class="sidebar-usuario">
+            <span id="usuario-nome">Carregando...</span>
+            <button onclick="logout()" class="btn-perigo" style="width:100%; margin-top: 4px;">
+                Sair
+            </button>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+        <h1 class="pagina-titulo">Cadastros Auxiliares</h1>
+
+        <!-- Tipos de serviço -->
+        <section class="card">
+            <h2>Tipos de serviço</h2>
+
+            <div id="erro-tipo" class="mensagem-erro"></div>
+            <div id="sucesso-tipo" class="mensagem-sucesso"></div>
+
+            <form id="form-tipo" class="form-inline">
+                <div class="form-group">
+                    <label for="tipo">Nome do tipo</label>
+                    <input type="text" id="tipo" placeholder="Ex.: Funilaria" required>
+                </div>
+                <button type="submit" id="btn-tipo" class="btn-primario">Cadastrar</button>
+            </form>
+
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-tipos">
+                        <tr><td colspan="2" class="estado-loading">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Fornecedores -->
+        <section class="card">
+            <h2>Fornecedores</h2>
+
+            <div id="erro-fornecedor" class="mensagem-erro"></div>
+            <div id="sucesso-fornecedor" class="mensagem-sucesso"></div>
+
+            <form id="form-fornecedor">
+                <div class="form-group">
+                    <label for="nome-fornecedor">Nome do fornecedor</label>
+                    <input type="text" id="nome-fornecedor" placeholder="Ex.: Auto Funilaria Silva" required>
+                </div>
+
+                <span class="rotulo">Tipos de serviço que executa</span>
+                <div id="lista-tipos" class="checkbox-grid">
+                    <span class="estado-loading">Carregando...</span>
+                </div>
+
+                <div class="form-acoes">
+                    <button type="submit" id="btn-fornecedor" class="btn-primario">Cadastrar fornecedor</button>
+                </div>
+            </form>
+
+            <div class="tabela-container" style="margin-top: 24px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Tipos de serviço</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-fornecedores">
+                        <tr><td colspan="3" class="estado-loading">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
+<script src="js/permissions.js"></script>
+<script src="js/components.js"></script>
+<script src="js/pages/auxiliares.js"></script>
+</body>
+</html>

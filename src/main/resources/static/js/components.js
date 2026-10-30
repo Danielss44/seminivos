@@ -58,4 +58,25 @@ function configurarSidebar() {
                 document.getElementById(id).parentElement.style.display = 'none';
             });
     }
+
+    if (!hasRole('ADMIN')) {
+        const auxiliares = document.getElementById('menu-auxiliares');
+        if (auxiliares) auxiliares.parentElement.style.display = 'none';
+    }
+}
+
+function mostrar(elemento, texto) {
+    elemento.textContent = texto;
+    elemento.classList.add('visivel');
+}
+
+function esconder(...elementos) {
+    elementos.forEach(el => el.classList.remove('visivel'));
+}
+
+function hojeLocal() {
+    const d = new Date();
+    const mes = String(d.getMonth() + 1).padStart(2, '0');
+    const dia = String(d.getDate()).padStart(2, '0');
+    return `${d.getFullYear()}-${mes}-${dia}`;
 }

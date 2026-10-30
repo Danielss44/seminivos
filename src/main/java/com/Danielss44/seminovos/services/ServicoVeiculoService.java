@@ -69,7 +69,13 @@ public class ServicoVeiculoService {
                 .status(StatusServico.EM_ANDAMENTO)
                 .build();
 
+
         repository.save(servicoVeiculo);
+
+        if (veiculo.getStatus() == StatusVeiculo.PRONTO_PARA_VENDA){
+            veiculo.setStatus(StatusVeiculo.EM_PREPARACAO);
+            veiculoRepository.save(veiculo);
+        }
 
         return toResponseDTO(servicoVeiculo);
     }

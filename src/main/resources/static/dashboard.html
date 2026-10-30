@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Seminovos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>Seminovos</h2>
+            <p>Gestão Operacional</p>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="/veiculos.html">Veículos</a></li>
+            <li><a href="/dashboard.html" id="menu-dashboard" class="ativo">Dashboard</a></li>
+            <li><a href="/cadastro-veiculo.html" id="menu-cadastro">Cadastrar Veículo</a></li>
+            <li><a href="/gestao-operacional.html" id="menu-gestao">Gestão Operacional</a></li>
+            <li><a href="/usuarios.html" id="menu-usuarios">Usuários</a></li>
+            <li><a href="/auxiliares.html" id="menu-auxiliares">Auxiliares</a></li>
+        </ul>
+
+        <div class="sidebar-usuario">
+            <span id="usuario-nome">Carregando...</span>
+            <button onclick="logout()" class="btn-perigo" style="width:100%; margin-top: 4px;">
+                Sair
+            </button>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+
+        <div class="pagina-cabecalho">
+            <h1 class="pagina-titulo">Dashboard</h1>
+            <div>
+                <span id="ultima-atualizacao" class="texto-discreto"></span>
+                <button id="btn-atualizar" class="btn-secundario">Atualizar</button>
+            </div>
+        </div>
+
+        <div id="mensagem-erro" class="mensagem-erro"></div>
+        <div id="loading" class="estado-loading">Carregando...</div>
+
+        <div id="conteudo-dashboard" style="display: none;">
+
+            <div id="indicadores" class="cards-indicadores"></div>
+
+            <section class="card">
+                <h2>Prontos para venda</h2>
+                <div class="tabela-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Placa</th>
+                                <th>Modelo</th>
+                                <th>Ano</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-prontos"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Em preparação</h2>
+                <div class="tabela-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Placa</th>
+                                <th>Modelo</th>
+                                <th>Entrada</th>
+                                <th>Dias no estoque</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-preparacao"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Serviços em andamento</h2>
+                <div class="tabela-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Serviço</th>
+                                <th>Fornecedor</th>
+                                <th>Valor</th>
+                                <th>Início</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-servicos"></tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
+<script src="js/permissions.js"></script>
+<script src="js/components.js"></script>
+<script src="js/pages/dashboard.js"></script>
+</body>
+</html>

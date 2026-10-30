@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Seminovos</title>
+    <link rel="icon" href="data:,">
+</head>
+<body>
+<script src="js/auth.js"></script>
+<script>
+    window.location.replace(verificarToken() ? '/veiculos.html' : '/login.html');
+</script>
+</body>
+</html>
